@@ -7,10 +7,10 @@
  * @param {[Promise]} promises - array of promises
  * @returns {Promise}
  *  
-*/
+ */
 
 export default function chain(promises) {
   return new Promise(async (resolve, reject) => {
-    // TODO: implement
+    Promise.all(promises).then(resolve("All resolved")).catch((err) => reject(err));
   });
 }

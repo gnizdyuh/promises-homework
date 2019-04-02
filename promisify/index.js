@@ -1,3 +1,8 @@
+import Axios from "axios";
+import {
+  resolve
+} from "dns";
+
 /**
  * Write a function `promisify` that receives a function `fn` as an argument.
  * `fn` is a node-style function that receives arguments and last parameter is always a callback function
@@ -11,12 +16,14 @@
  * expect a callback function as one of its arguments
  * 
  * See example usage in the run.js
-*/
+ */
 
 export default function promisify(fn) {
-  return function(...args) {
-    // TODO: implement
-    fn(...args, () => {});
-  };
+  return function (...args) {
+    return new Promise(async (resolve, reject) => {
+      fn(...args, (error, result) => {
+        error ? reject(error) : resolve(result);
+      })
+    });
+  }
 };
-
